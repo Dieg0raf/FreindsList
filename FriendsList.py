@@ -1,4 +1,12 @@
 from traceback import print_tb
+import os
+
+#function used to clear terminal code to look nicer
+def clearConsole():
+    command = 'clear'
+    if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
+        command = 'cls'
+    os.system(command)
 
 # function used to display menu 
 def display_Menu():
@@ -14,11 +22,21 @@ def display_Menu():
 
 # function used to display Friends List
 def print_friendsList(List):
-    i = 0
-    for name in List:
-            i += 1
-            print(f"{i}: {name}")
-    print()
+    if(len(List) == 0):
+        print("0 Friends".center(26))
+        print()
+    else:
+        i = 0
+        for name in List:
+                i += 1
+                print(f"{i}: {name}")
+        print()
+        if(i == 1):
+            print(f"You have {i} Friend in total")
+            print()
+        else:
+            print(f"You have {i} Friends in total")
+            print()
 
 # function used to ouput the choice the user chose
 def menu_Option(userChoice, List):
@@ -83,12 +101,13 @@ def menu_Option(userChoice, List):
     # if user enter 5
     elif(userChoice == 5):
         print('-'*26)
-        print("Friends List") # Freinds list is outputed
+        print("Friends List".center(26)) # Freinds list is outputed
         print('-'*26)
         print_friendsList(List) # call function which prints out Friends List
     
     # if user enters 6
     elif(userChoice == 6):
+        clearConsole()
         print('-'*26)
         print("Friends List".center(26)) # Freinds List is outputed onto screen
         print('-'*26)
@@ -98,6 +117,7 @@ def menu_Option(userChoice, List):
         else:
             print_friendsList(List)
         print("Thank you for making your Freinds List with my program")
+        print()
 
 
 # Display of the starting screen
@@ -130,9 +150,11 @@ if(letter == 'M'):
             userChoice = int(input("Choose an option (1-6): "))
             if(userChoice < 1 or userChoice > 6): # checks to see if user enters an integer 1-6
                     print("Please choose an option (1-6)!")
+                    print()
                     continue
         except ValueError:
             print("Input needs to be integer!")
+            print()
             continue
         break
     menu_Option(userChoice,friendList)
@@ -145,9 +167,11 @@ if(letter == 'M'):
                 userChoice = int(input("Choose an option (1-6): "))
                 if(userChoice < 1 or userChoice > 6):  # checks to see if user enters an integer 1-6
                     print("Please choose an option (1-6)!")
+                    print()
                     continue
             except ValueError:
                 print("Input needs to be integer!")
+                print()
                 continue
             break
         menu_Option(userChoice,friendList)
