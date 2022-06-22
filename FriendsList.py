@@ -22,6 +22,8 @@ def print_friendsList(List):
 
 # function used to ouput the choice the user chose
 def menu_Option(userChoice, List):
+    # Declaring notThere variable
+    notThere = False
     # if user enter 1
     if(userChoice == 1):
         print('-'*30)
@@ -49,10 +51,12 @@ def menu_Option(userChoice, List):
     
     # if user enters 3
     elif(userChoice == 3):
+        print('-'*45)
         changeName = input("Name of the friend you want to change: ") # name wanting to change
+        print()
         newName = input("New Name: ") # new name that is going to be given in place of the old name
-        # checks through list to find the name of the user
-        for i in range(len(List)):
+        print()
+        for i in range(len(List)): # checks through list to find the name of the user
             if(List[i] == changeName):
                 List[i] = newName
                 print(f"\'{changeName}\'s name has been changed to \'{newName}\'.") # if found it will change and output this message
@@ -95,11 +99,13 @@ def menu_Option(userChoice, List):
             print_friendsList(List)
         print("Thank you for making your Freinds List with my program")
 
+
 # Display of the starting screen
 print('-'*35)
 print("Welcome to making your freinds list")
 print('-'*35)
 print("Enter the letter \'M\' to enter the Menu")
+print()
 letter = input("Enter: ")
 letter = letter.upper()
 
@@ -115,11 +121,33 @@ if(letter != 'M'):
 friendList = []
 
 # prints out the menu for the program
+
 if(letter == 'M'):
     display_Menu()
-    userChoice = int(input("Choose an option (1-6): "))
+    # if userChoice is not an integer it'll keep asking until integer is entered
+    while True:
+        try:
+            userChoice = int(input("Choose an option (1-6): "))
+            if(userChoice < 1 or userChoice > 6): # checks to see if user enters an integer 1-6
+                    print("Please choose an option (1-6)!")
+                    continue
+        except ValueError:
+            print("Input needs to be integer!")
+            continue
+        break
     menu_Option(userChoice,friendList)
+
     while (userChoice != 6):
         display_Menu()
-        userChoice = int(input("Choose an option (1-6): "))
+        # if userChoice is not an integer it'll keep asking until integer is entered
+        while True:
+            try:
+                userChoice = int(input("Choose an option (1-6): "))
+                if(userChoice < 1 or userChoice > 6):  # checks to see if user enters an integer 1-6
+                    print("Please choose an option (1-6)!")
+                    continue
+            except ValueError:
+                print("Input needs to be integer!")
+                continue
+            break
         menu_Option(userChoice,friendList)
